@@ -11,6 +11,10 @@ const client = new Client({
   restTimeOffset: 0
 });
 
+const chalk = require('chalk');
+
+const figlet = require('figlet');
+
 client.login(TOKEN);
 client.commands = new Collection();
 client.prefix = PREFIX;
@@ -22,7 +26,10 @@ const escapeRegex = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
  * Client Events
  */
 client.on("ready", () => {
-  console.log(`${client.user.username} ready!`);
+  console.log(chalk.red(figlet.textSync('elevone', { horizontalLayout: 'full' }))); 
+  console.log(chalk.blue(`${client.user.username} ready! \n------\n`));
+  console.log(chalk.green(`> Channels: ${client.channels.cache.size}\n`));
+  console.log(chalk.green(`> Servers: ${client.guilds.cache.size}\n`));
   client.user.setActivity(`${PREFIX}help and ${PREFIX}play`, { type: "WATCHING" });
 });
 client.on("warn", (info) => console.log(info));
